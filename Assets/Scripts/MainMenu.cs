@@ -18,7 +18,16 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+        try
+        {
+            SoundManager.currentScene = Scene.Level;
+        }
+        catch
+        {
+
+        }
+        SceneManager.LoadScene("ChooseLevel", LoadSceneMode.Single);
+        
     }
     public void Information()
     {
