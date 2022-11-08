@@ -12,7 +12,7 @@ public class CommandManager : MonoBehaviour
 {
     public static CommandManager Instance; 
     public List<CommandModel> commands = new List<CommandModel>();
-
+    Vector3 startPos;
 
     //khu vực khởi tạo
     [SerializeField] TMP_InputField runValue;
@@ -34,7 +34,10 @@ public class CommandManager : MonoBehaviour
     {
         Instance = this;
     }
-
+    private void Start()
+    {
+        startPos = BallMovement.Instance.gameObject.transform.position;
+    }
     public void OnAdd()
     {
         if(!Regex.IsMatch(runValue.text, @"^*[0-9\.,-]+$"))
@@ -168,28 +171,35 @@ public class CommandManager : MonoBehaviour
         //khi kết thúc list command nên đợi 3s để kết thúc đẹp
         yield return new WaitForSeconds(3);
 
-        BallMovement.Instance.ballRb.velocity = Vector2.zero;
+        
+        excuteTime = 0;
         commandStatus.text = "";
         isExcuting = false;
         btnRun.GetComponent<Button>().enabled = true;
         btnRun.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
         commandSetupUIGroup.SetTrigger("Enable");
         btnCancel.SetActive(false);
-    }
+        BallMovement.Instance.ballRb.velocity = Vector2.zero;
+        BallMovement.Instance.transform.position = startPos;
 
+    }  
     //Nhấn nút hủy để sắp xếp lại
     public void OnCancel()
     {
-        BallMovement.Instance.transform.position = new Vector3(0, 0, 0);
-        BallMovement.Instance.ballRb.velocity = Vector2.zero;
-
+        if (isExcuting == false) return;
         commandStatus.text = "";
-        isExcuting = false;
+        
         btnRun.GetComponent<Button>().enabled = true;
         btnRun.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
         commandSetupUIGroup.SetTrigger("Enable");
         btnCancel.SetActive(false);
-        StopCoroutine(RunCommand());
+        
+        isExcuting = false;
+        excuteTime = 0;
+        //StopCoroutine(RunCommand());
+        StopAllCoroutines();
+        BallMovement.Instance.ballRb.velocity = Vector2.zero;
+        BallMovement.Instance.transform.position = startPos;
     }    
     private void Update()
     {
