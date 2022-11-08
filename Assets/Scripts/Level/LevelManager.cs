@@ -12,6 +12,10 @@ public class LevelManager : MonoBehaviour
     {
         Instance = this;
     }
+    private void Start()
+    {
+        currentLevel = int.Parse(SceneManager.GetActiveScene().name[SceneManager.GetActiveScene().name.Length - 1].ToString());
+    }
     public void Replay()
     {
         PopupManager.Instance.OnExitPopup();
@@ -20,6 +24,11 @@ public class LevelManager : MonoBehaviour
     public void NextLevel()
     {
         if (thisLevelIsMax) return;
-        SceneManager.LoadScene("Level"+(currentLevel + 1), LoadSceneMode.Single);
+        int level = currentLevel + 1;
+        if(level > PlayerPrefs.GetInt("CurrentLevel"))
+        {
+            PlayerPrefs.SetInt("CurrentLevel", level);
+        }    
+        SceneManager.LoadScene("Level"+level, LoadSceneMode.Single);
     }    
 }

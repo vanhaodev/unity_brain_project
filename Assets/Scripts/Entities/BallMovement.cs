@@ -17,9 +17,8 @@ public class BallMovement : MonoBehaviour
         ballRb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        ballRb.constraints = RigidbodyConstraints2D.None;
     }
 }
