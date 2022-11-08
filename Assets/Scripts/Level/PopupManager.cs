@@ -12,6 +12,8 @@ public class PopupManager : MonoBehaviour
     [SerializeField] GameObject winParticle;
     [SerializeField] GameObject winParticle2;
     [SerializeField] GameObject loseParticle;
+
+    [SerializeField] GameObject[] hideUIObject;
     void Awake()
     {
         Instance = this;
@@ -19,6 +21,13 @@ public class PopupManager : MonoBehaviour
     public void FreezeTimeScale()
     {
         Time.timeScale = 0;
+    }    
+    public void HideUI()
+    {
+        foreach(GameObject ui in hideUIObject)
+        {
+            ui.SetActive(!ui.activeSelf);
+        }    
     }    
     public void OnWin()
     {
@@ -28,6 +37,7 @@ public class PopupManager : MonoBehaviour
         winParticle2.SetActive(true);
         loseParticle.SetActive(false);
         btnNext.SetActive(true);
+        HideUI();
         popupContent.text = "You won!\n" +
             "<size=40>You're amazing!</size>";
     
@@ -40,6 +50,7 @@ public class PopupManager : MonoBehaviour
         winParticle2.SetActive(false);
         loseParticle.SetActive(true);
         btnNext.SetActive(false);
+        HideUI();
         popupContent.text = "You lose!\n" +
             "<size=40>Don't cry!</size>";
 
@@ -48,6 +59,7 @@ public class PopupManager : MonoBehaviour
     {
         SoundManager.Instance.PlayGameSong();
         popup.SetActive(false);
+        HideUI();
         Time.timeScale = 1;
     }    
 }

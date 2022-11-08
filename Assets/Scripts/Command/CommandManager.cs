@@ -179,8 +179,7 @@ public class CommandManager : MonoBehaviour
         btnRun.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
         commandSetupUIGroup.SetTrigger("Enable");
         btnCancel.SetActive(false);
-        BallMovement.Instance.ballRb.velocity = Vector2.zero;
-        BallMovement.Instance.transform.position = startPos;
+        ResetBall();
 
     }  
     //Nhấn nút hủy để sắp xếp lại
@@ -198,8 +197,16 @@ public class CommandManager : MonoBehaviour
         excuteTime = 0;
         //StopCoroutine(RunCommand());
         StopAllCoroutines();
-        BallMovement.Instance.ballRb.velocity = Vector2.zero;
+        ResetBall();
+
+
+    }    
+    public void ResetBall()
+    {
+        BallMovement.Instance.ballRb.constraints = RigidbodyConstraints2D.FreezeRotation;
         BallMovement.Instance.transform.position = startPos;
+        BallMovement.Instance.ballRb.velocity = Vector2.zero;
+        BallMovement.Instance.ballRb.rotation = 0;
     }    
     private void Update()
     {

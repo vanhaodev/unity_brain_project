@@ -22,7 +22,8 @@ public class CollisionObject : MonoBehaviour
                 case CollisionObjectType.Trap:
                     PopupManager.Instance.OnLose();
                     break;
-            }    
+            }
+            CommandManager.Instance.ResetBall();
         }    
     }
 }
