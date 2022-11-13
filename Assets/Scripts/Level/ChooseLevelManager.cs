@@ -11,7 +11,7 @@ public class ChooseLevelManager : MonoBehaviour
     [SerializeField] GameObject levelButtonSlotContainer;
     void OnEnable()
     {
-        if(PlayerPrefs.GetInt("CurrentLevel") < 1)
+        if (PlayerPrefs.GetInt("CurrentLevel") < 1)
         {
             PlayerPrefs.SetInt("CurrentLevel", 1);
         }    
@@ -21,5 +21,7 @@ public class ChooseLevelManager : MonoBehaviour
             slot.GetComponent<ChooseLevelSlot>().level = i+1;
             slot.GetComponentInChildren<TMP_Text>().text = (i + 1).ToString();
         }
+
+        levelButtonSlotContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 360f + (360f * ((PlayerPrefs.GetInt("CurrentLevel")-1)/2)));
     }
 }

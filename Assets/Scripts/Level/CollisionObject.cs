@@ -35,9 +35,11 @@ public class CollisionObject : MonoBehaviour
             {
                 case CollisionObjectType.Cup:
                     PopupManager.Instance.OnWin();
+                    GameObject.FindGameObjectWithTag("SoundMiniGame").GetComponent<SoundMiniGame>().PlayWinSong();
                     break;
                 case CollisionObjectType.Trap:
                     PopupManager.Instance.OnLose();
+                    GameObject.FindGameObjectWithTag("SoundMiniGame").GetComponent<SoundMiniGame>().PlayLoseSong();
                     break;
             }
             GameObject.FindGameObjectWithTag("Basketball").transform.position = new Vector3(0, 0, GameObject.FindGameObjectWithTag("Basketball").transform.position.z);

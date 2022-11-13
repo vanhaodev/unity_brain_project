@@ -4,21 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-<<<<<<< HEAD
   - Basketball
   - BubbleCal
-=======
-  - Ground
->>>>>>> abe4be665c74f520d871b07cc30a3d0312069ccc
+  - SoundMiniGame
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Map
+  - 
   - Water
   - UI
-  - Player
-  - CheckMap
+  - 
+  - 
   - 
   - 
   - 
@@ -46,10 +43,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Entity
-    uniqueID: 981914731
-    locked: 0
-  - name: HUDUI
-    uniqueID: 1171393669
     locked: 0
