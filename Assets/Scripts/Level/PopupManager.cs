@@ -58,8 +58,8 @@ public class PopupManager : MonoBehaviour
     public void OnExitPopup()
     {
         SoundManager.Instance.PlayGameSong();
-        popup.SetActive(false);
         HideUI();
+        popup.SetActive(false);
         Time.timeScale = 1;
     }    
 }

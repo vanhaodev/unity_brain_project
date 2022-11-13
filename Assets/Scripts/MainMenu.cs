@@ -29,6 +29,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("ChooseLevel", LoadSceneMode.Single);
         
     }
+
+    public void PlayMiniGame()
+    {
+        SceneManager.LoadScene("ChooseMiniGame", LoadSceneMode.Single);
+    }    
     public void Information()
     {
 
