@@ -19,9 +19,11 @@ public class CollisionObject : MonoBehaviour
             {
                 case CollisionObjectType.Cup:
                     PopupManager.Instance.OnWin();
+                    CommandManager.Instance.ResetBall();
                     break;
                 case CollisionObjectType.Trap:
                     PopupManager.Instance.OnLose();
+                    CommandManager.Instance.ResetBall();
                     break;
             }
             CommandManager.Instance.ResetBall();
