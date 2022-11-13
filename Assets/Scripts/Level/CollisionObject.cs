@@ -10,9 +10,10 @@ public enum CollisionObjectType
 public class CollisionObject : MonoBehaviour
 {
     public CollisionObjectType objectType;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             switch(objectType)
             {
@@ -25,7 +26,21 @@ public class CollisionObject : MonoBehaviour
                     CommandManager.Instance.ResetBall();
                     break;
             }
-            
-        }    
+            CommandManager.Instance.ResetBall();
+        }
+
+        if (collision.gameObject.tag == "Basketball")
+        {
+            switch (objectType)
+            {
+                case CollisionObjectType.Cup:
+                    PopupManager.Instance.OnWin();
+                    break;
+                case CollisionObjectType.Trap:
+                    PopupManager.Instance.OnLose();
+                    break;
+            }
+            GameObject.FindGameObjectWithTag("Basketball").transform.position = new Vector3(0, 0, GameObject.FindGameObjectWithTag("Basketball").transform.position.z);
+        }
     }
 }
