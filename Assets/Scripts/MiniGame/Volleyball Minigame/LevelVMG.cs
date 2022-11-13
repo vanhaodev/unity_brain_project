@@ -6,11 +6,9 @@ public class LevelVMG : MonoBehaviour
 {
     int currentLv;
     [SerializeField] GameObject[] lvs;
-    [SerializeField] int customLv = 0;
 
     private void Awake()
     {
-        PlayerPrefs.SetInt("LevelVMG", customLv);
 
         if (PlayerPrefs.GetInt("LevelVMG") == 0)
         {

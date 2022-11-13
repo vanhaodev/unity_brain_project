@@ -8,6 +8,7 @@ public class CalLevelManager : MonoBehaviour
 {
     [SerializeField] GameObject calculation;
     [SerializeField] GameObject btnInexist;
+    public GameObject audioSource;
 
     int a, b, c;
 
@@ -185,6 +186,9 @@ public class CalLevelManager : MonoBehaviour
 
         switch(PlayerPrefs.GetInt("CalLevel"))
         {
+            case 0:
+                Win_Lose(score == Result(a, b, operation));
+                break;
             case 1:
                 Win_Lose(score == Result(a, b, operation));
                 break;
@@ -208,12 +212,15 @@ public class CalLevelManager : MonoBehaviour
     {
         if (kq)
         {
+            audioSource.GetComponent<SoundMiniGame>().PlayWinSong();
             PopupManager.Instance.OnWin();
         }
         else
         {
+            audioSource.GetComponent<SoundMiniGame>().PlayLoseSong();
             PopupManager.Instance.OnLose();
         }
+
         btnInexist.SetActive(false);
     }    
 
