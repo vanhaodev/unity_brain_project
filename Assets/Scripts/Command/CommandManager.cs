@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 public class CommandManager : MonoBehaviour
 {
     public static CommandManager Instance; 
@@ -25,7 +26,7 @@ public class CommandManager : MonoBehaviour
     [SerializeField] GameObject btnRun;
     [SerializeField] GameObject btnCancel;
     public Color[] commandUIBackground;
-
+    public List<int> limitCommandLevel;
     //validate
     //chạy
     public bool isExcuting = false;
@@ -37,6 +38,18 @@ public class CommandManager : MonoBehaviour
     private void Start()
     {
         startPos = BallMovement.Instance.gameObject.transform.position;
+        limitCommandLevel.Clear();
+        //bỏ phần tử 0
+        limitCommandLevel.Add(0);
+        //bắt đầu từ level 1 có giới hạn là 5 lệnh
+        limitCommandLevel.Add(5); //lv1
+        limitCommandLevel.Add(3); //lv2
+        limitCommandLevel.Add(5); //lv3
+        limitCommandLevel.Add(5); //lv4
+        limitCommandLevel.Add(5); //lv5
+        limitCommandLevel.Add(5); //lv6
+        limitCommandLevel.Add(5); //lv7
+        limitCommandLevel.Add(5); //lv8
     }
     public void OnAdd()
     {
@@ -45,6 +58,12 @@ public class CommandManager : MonoBehaviour
             //Debug.LogError("Chỉ số và số thực");
             return;
         }
+        //kiểm tra giới hạn command
+        if(commands.Count >= limitCommandLevel[LevelManager.Instance.currentLevel])
+        {
+            Debug.Log("Đạt giới hạn");
+            return;
+        }    
         CommandType type = CommandType.VectorX;
         switch (valueTypeDropDown.value)
         {
@@ -74,7 +93,15 @@ public class CommandManager : MonoBehaviour
         {
             var slot = Instantiate(commandUIPrefabs, commandContainer.transform).GetComponent<CommandSlot>();
             slot.id = commands[i].commandId;
-            slot.index.text = i.ToString();
+            
+            if((i+1) == limitCommandLevel[LevelManager.Instance.currentLevel])
+            {
+                slot.index.text = $"<color=red>{i + 1}/{limitCommandLevel[LevelManager.Instance.currentLevel]}</color>";
+            }    
+            else
+            {
+                slot.index.text = $"{i + 1}/{limitCommandLevel[LevelManager.Instance.currentLevel]}";
+            }    
             slot.commandType = commands[i].commandType;
             slot.SetBackgroundColor();
             slot.description.text = $"{commands[i].commandType} = {commands[i].value}";
@@ -124,7 +151,7 @@ public class CommandManager : MonoBehaviour
         if (isExcuting == false)
         {
             if (commands.Count < 1) return;
-
+  
             StartCoroutine(RunCommand());
             //tính thời gian chạy
             for(int i = 0; i < commands.Count; i++)
