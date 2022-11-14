@@ -36,7 +36,14 @@ public class MainMenu : MonoBehaviour
     }    
     public void Information()
     {
+        try
+        {
+            Application.OpenURL("https://youtu.be/zndvqTc4P9I");
+        }
+        catch
+        {
 
+        }
     }    
     public void SettingGame()
     {

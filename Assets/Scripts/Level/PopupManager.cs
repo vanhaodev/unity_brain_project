@@ -32,6 +32,10 @@ public class PopupManager : MonoBehaviour
     public void OnWin()
     {
         SoundManager.Instance.PlayWinSong();
+        if(LevelManager.Instance != null)
+        {
+            LevelManager.Instance.UpdateLevel();
+        }
         popup.SetActive(true);
         winParticle.SetActive(true);
         winParticle2.SetActive(true);

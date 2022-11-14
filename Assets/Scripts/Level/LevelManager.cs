@@ -20,15 +20,24 @@ public class LevelManager : MonoBehaviour
     {
         PopupManager.Instance.OnExitPopup();
         CommandManager.Instance.OnCancel();
-    }    
-    public void NextLevel()
+    }
+    public void UpdateLevel()
     {
         if (thisLevelIsMax) return;
         int level = currentLevel + 1;
-        if(level > PlayerPrefs.GetInt("CurrentLevel"))
+        if (level > PlayerPrefs.GetInt("CurrentLevel"))
         {
             PlayerPrefs.SetInt("CurrentLevel", level);
-        }    
+        }
+    }
+    public void NextLevel()
+    {
+        //if (thisLevelIsMax) return;
+        int level = currentLevel + 1;
+        //if(level > PlayerPrefs.GetInt("CurrentLevel"))
+        //{
+        //    PlayerPrefs.SetInt("CurrentLevel", level);
+        //}    
         SceneManager.LoadScene("Level"+level, LoadSceneMode.Single);
     }    
 }
