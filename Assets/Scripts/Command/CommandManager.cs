@@ -12,7 +12,7 @@ public class CommandManager : MonoBehaviour
 {
     public static CommandManager Instance; 
     public List<CommandModel> commands = new List<CommandModel>();
-
+    Vector3 startPos;
 
     //khu vực khởi tạo
     [SerializeField] TMP_InputField runValue;
@@ -24,6 +24,7 @@ public class CommandManager : MonoBehaviour
     [SerializeField] GameObject commandUIPrefabs;
     [SerializeField] GameObject btnRun;
     [SerializeField] GameObject btnCancel;
+    public Color[] commandUIBackground;
 
     //validate
     //chạy
@@ -33,12 +34,15 @@ public class CommandManager : MonoBehaviour
     {
         Instance = this;
     }
-
+    private void Start()
+    {
+        startPos = BallMovement.Instance.gameObject.transform.position;
+    }
     public void OnAdd()
     {
         if(!Regex.IsMatch(runValue.text, @"^*[0-9\.,-]+$"))
         {
-            Debug.LogError("Chỉ số và số thực");
+            //Debug.LogError("Chỉ số và số thực");
             return;
         }
         CommandType type = CommandType.VectorX;
@@ -55,7 +59,7 @@ public class CommandManager : MonoBehaviour
                 break;
         }
         float value = float.Parse(runValue.text.Replace(".", ",")); //float chỉ nhận dấu phẩy
-        CommandModel cmd = new CommandModel(type, Guid.NewGuid(), value);
+        CommandModel cmd = new CommandModel(type, Guid.NewGuid(), value, UnityEngine.Random.Range(0, commandUIBackground.Length));
         commands.Add(cmd);
         UpdateCommandList();
     }    
@@ -74,14 +78,53 @@ public class CommandManager : MonoBehaviour
             slot.commandType = commands[i].commandType;
             slot.SetBackgroundColor();
             slot.description.text = $"{commands[i].commandType} = {commands[i].value}";
+            slot.gameObject.GetComponent<Image>().color = commandUIBackground[commands[i].background];
+
         }    
     }    
-    
+    public void SwapIndex(Guid id, bool isUp)
+    {
+        //item ở đầu nhất thì không thể chuyển lên
+        //item ở cuối nhất thì không thể chuyển xuống
+        //item là duy nhất thì không thể làm gì
+
+        if (commands.Count < 2)
+            return;
+
+        for (int i = 0; i < commands.Count; i++)
+        {
+            if(commands[i].commandId == id)
+            {
+                if(isUp) //người chơi muốn chuyển lên
+                {
+                    if (i == 0)
+                        return;
+
+                    var temp = commands[i-1]; //lưu người ta lại
+                    commands[i-1] = commands[i];
+                    commands[i] = temp;
+                    break;
+                }   
+                else //chuyển xuống
+                {
+                    if (i == commands.Count - 1)
+                        return;
+
+                    var temp = commands[i + 1]; //lưu người ta lại
+                    commands[i + 1] = commands[i];
+                    commands[i] = temp;
+                    break;
+                }    
+            }    
+        }    
+    }
+
     public void OnRun()
     {
         if (isExcuting == false)
         {
             if (commands.Count < 1) return;
+
             StartCoroutine(RunCommand());
             //tính thời gian chạy
             for(int i = 0; i < commands.Count; i++)
@@ -90,7 +133,9 @@ public class CommandManager : MonoBehaviour
                 {
                     excuteTime += commands[i].value*0.001f;
                 }    
-            }    
+            }
+            //thêm 3s cuối danh sách để không bị kết thúc dở
+            excuteTime += 3000 * 0.001f;
         }    
     }
 
@@ -123,38 +168,56 @@ public class CommandManager : MonoBehaviour
                 //yield return new WaitForSeconds(0.5f);
             }
         }
+        //khi kết thúc list command nên đợi 3s để kết thúc đẹp
+        yield return new WaitForSeconds(3);
+
+        
+        excuteTime = 0;
         commandStatus.text = "";
         isExcuting = false;
         btnRun.GetComponent<Button>().enabled = true;
         btnRun.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
         commandSetupUIGroup.SetTrigger("Enable");
         btnCancel.SetActive(false);
-    }
+        ResetBall();
 
+    }  
     //Nhấn nút hủy để sắp xếp lại
     public void OnCancel()
     {
-        BallMovement.Instance.transform.position = new Vector3(0, 0, 0);
-        BallMovement.Instance.ballRb.velocity = Vector2.zero;
-
+        if (isExcuting == false) return;
         commandStatus.text = "";
-        isExcuting = false;
+        
         btnRun.GetComponent<Button>().enabled = true;
         btnRun.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
         commandSetupUIGroup.SetTrigger("Enable");
         btnCancel.SetActive(false);
-        StopCoroutine(RunCommand());
+        
+        isExcuting = false;
+        excuteTime = 0;
+        //StopCoroutine(RunCommand());
+        StopAllCoroutines();
+        ResetBall();
+
+
+    }    
+    public void ResetBall()
+    {
+        BallMovement.Instance.ballRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        BallMovement.Instance.transform.position = startPos;
+        BallMovement.Instance.ballRb.velocity = Vector2.zero;
+        BallMovement.Instance.ballRb.rotation = 0;
     }    
     private void Update()
     {
         if(isExcuting)
         {
-            btnRun.GetComponentInChildren<TMP_Text>().text = $"Còn {excuteTime.ToString("0.00")}s";
+            btnRun.GetComponentInChildren<TMP_Text>().text = $"{excuteTime.ToString("0.00")}s";
             excuteTime -= Time.deltaTime;
         }    
         else
         {
-            btnRun.GetComponentInChildren<TMP_Text>().text = "Chạy";
+            btnRun.GetComponentInChildren<TMP_Text>().text = "Run";
         }    
     }
 

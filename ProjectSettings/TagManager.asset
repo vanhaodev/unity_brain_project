@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Basketball
+  - BubbleCal
+  - SoundMiniGame
   layers:
   - Default
   - TransparentFX
@@ -40,10 +43,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Entity
-    uniqueID: 981914731
-    locked: 0
-  - name: HUDUI
-    uniqueID: 1171393669
     locked: 0

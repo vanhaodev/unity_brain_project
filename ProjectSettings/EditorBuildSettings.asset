@@ -6,6 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/MainMenu.unity
+    guid: 396bcc7bb6f92ba48b3478ee0630cda2
+  - enabled: 1
+    path: Assets/Scenes/ChooseLevel.unity
+    guid: a5119755602c5b64ca9bfffe0b2b16d9
+  - enabled: 1
+    path: Assets/Scenes/MiniGame/VolleyballGame.unity
+    guid: 17dd18760e3e3e6459394bb783175d9d
+  - enabled: 1
+    path: Assets/Scenes/MiniGame/ChooseMiniGame.unity
+    guid: c394db09104ede94ba678d813c3e37bb
+  - enabled: 1
+    path: Assets/Scenes/MiniGame/CalculatorGame.unity
+    guid: 0b0e89d8cb9b6fa40a5ed38ea308350e
+  - enabled: 1
+    path: Assets/Scenes/Level/Level1.unity
+    guid: 78ef95835be62814385c1d92c016757f
+  - enabled: 1
+    path: Assets/Scenes/Level/Level2.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Level/Level3.unity
+    guid: 869f5f0e4da29c74896278254e58e34d
   m_configObjects: {}
