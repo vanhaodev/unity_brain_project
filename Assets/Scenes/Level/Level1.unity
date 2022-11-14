@@ -7839,6 +7839,7 @@ MonoBehaviour:
   - {r: 0.30566037, g: 1, b: 0.74293864, a: 1}
   - {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
   - {r: 0.97807074, g: 1, b: 0, a: 1}
+  limitCommandLevel: 
   isExcuting: 0
 --- !u!1 &1822223137
 GameObject:
