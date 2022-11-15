@@ -80,7 +80,7 @@ public class CalLevelManager : MonoBehaviour
                 operation = 'x';
                 break;
             case 4:
-                operation = '÷';
+                operation = 'E';
                 break;
         }
 
@@ -124,7 +124,7 @@ public class CalLevelManager : MonoBehaviour
                 return (a - b);
             case 'x':
                 return (a * b);
-            case '÷':
+            case 'E':
                 return (Mathf.Round((float)a / b * 100.0f) * 0.01f);
         }
         return 0;

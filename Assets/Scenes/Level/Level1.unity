@@ -351,7 +351,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2044496762}
   m_HandleRect: {fileID: 2044496761}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7839,6 +7839,7 @@ MonoBehaviour:
   - {r: 0.30566037, g: 1, b: 0.74293864, a: 1}
   - {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
   - {r: 0.97807074, g: 1, b: 0, a: 1}
+  limitCommandLevel: 
   isExcuting: 0
 --- !u!1 &1822223137
 GameObject:
