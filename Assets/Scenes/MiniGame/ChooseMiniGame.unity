@@ -772,6 +772,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1663612599}
     m_Modifications:
+    - target: {fileID: 423203247590465078, guid: 0342faf0428effc4a8c292fcfcb63080, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 423203247590465079, guid: 0342faf0428effc4a8c292fcfcb63080, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -347.41003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2454193866200554232, guid: 0342faf0428effc4a8c292fcfcb63080, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3177766617886278688, guid: 0342faf0428effc4a8c292fcfcb63080, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -820,11 +832,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3177766617886278689, guid: 0342faf0428effc4a8c292fcfcb63080, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177766619800806079, guid: 0342faf0428effc4a8c292fcfcb63080, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0342faf0428effc4a8c292fcfcb63080, type: 3}
---- !u!4 &1090652365 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3177766617886278688, guid: 0342faf0428effc4a8c292fcfcb63080, type: 3}
+--- !u!224 &1090652365 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2454193866200554232, guid: 0342faf0428effc4a8c292fcfcb63080, type: 3}
   m_PrefabInstance: {fileID: 1090652364}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1097532924
@@ -941,7 +961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00018310547}
+  m_AnchoredPosition: {x: 0, y: -0.00024414062}
   m_SizeDelta: {x: 0, y: 201.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1469940277

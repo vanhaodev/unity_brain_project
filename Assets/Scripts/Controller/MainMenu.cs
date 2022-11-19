@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour
     {
         try
         {
-            Application.OpenURL("https://youtu.be/zndvqTc4P9I");
+            Application.OpenURL("https://trello.com/b/uSVsyYFk/brainup");
         }
         catch
         {

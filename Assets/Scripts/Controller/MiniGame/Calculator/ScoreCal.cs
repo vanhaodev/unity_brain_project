@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreCal : MonoBehaviour
@@ -9,6 +7,7 @@ public class ScoreCal : MonoBehaviour
     [SerializeField] Transform spawnBC;
     [SerializeField] GameObject text;
     [SerializeField] public float score;
+    public GameObject test;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "BubbleCal")
@@ -21,17 +20,15 @@ public class ScoreCal : MonoBehaviour
 
     public void ScoreRound()
     {
-        if (score.ToString().IndexOf('.') != -1)
-        {
-            score = float.Parse(score.ToString().Substring(0, score.ToString().IndexOf('.')));
-            text.GetComponent<Text>().text = score.ToString();
-            SetScale();
-        }
+
+        score = (int)score;
+        SetScale();
+        text.GetComponent<Text>().text = score.ToString();
     }
 
     void AddScore(string str)
     {
-        switch(str[0])
+        switch (str[0])
         {
             case '+':
                 score += int.Parse(str.Substring(1, str.Length - 1));
@@ -62,7 +59,7 @@ public class ScoreCal : MonoBehaviour
             score = -1000000;
         }
 
-            text.GetComponent<Text>().text = score.ToString();
+        text.GetComponent<Text>().text = score.ToString();
 
         SetScale();
 
@@ -71,7 +68,7 @@ public class ScoreCal : MonoBehaviour
     void SetColor()
     {
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-    }    
+    }
 
     void SetScale()
     {
@@ -81,5 +78,5 @@ public class ScoreCal : MonoBehaviour
         gameObject.transform.localScale = new Vector3(soChuSo, soChuSo, soChuSo);
 
         text.GetComponent<RectTransform>().localScale = new Vector3(0.01f / soChuSo, 0.01f / soChuSo, 0.01f / soChuSo);
-    }    
+    }
 }

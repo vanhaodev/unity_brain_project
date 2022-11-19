@@ -1273,7 +1273,7 @@ GameObject:
   - component: {fileID: 1049034826}
   - component: {fileID: 1049034825}
   m_Layer: 0
-  m_Name: Config\
+  m_Name: Config
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
